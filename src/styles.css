@@ -44,6 +44,8 @@
   --color-destructive-foreground: var(--destructive-foreground);
   --color-terracotta: var(--terracotta);
   --color-terracotta-foreground: var(--terracotta-foreground);
+  --color-sage: var(--sage);
+  --color-sage-foreground: var(--sage-foreground);
   --color-earth: var(--earth);
   --color-earth-foreground: var(--earth-foreground);
   --font-display: var(--font-serif-display);
@@ -70,28 +72,30 @@
 
 :root {
   --radius: 0rem;
-  --background: oklch(0.967 0.006 80);
-  --foreground: oklch(0.253 0.004 60);
-  --card: oklch(0.985 0.004 80);
+  --background: oklch(0.963 0.014 78);
+  --foreground: oklch(0.255 0.010 62);
+  --card: oklch(0.978 0.010 80);
   --card-foreground: oklch(0.253 0.004 60);
-  --popover: oklch(0.985 0.004 80);
+  --popover: oklch(0.978 0.010 80);
   --popover-foreground: oklch(0.253 0.004 60);
   --primary: oklch(0.253 0.004 60);
   --primary-foreground: oklch(0.967 0.006 80);
-  --secondary: oklch(0.93 0.009 80);
+  --secondary: oklch(0.925 0.020 76);
   --secondary-foreground: oklch(0.253 0.004 60);
-  --muted: oklch(0.93 0.009 80);
-  --muted-foreground: oklch(0.52 0.008 70);
+  --muted: oklch(0.925 0.020 76);
+  --muted-foreground: oklch(0.505 0.016 68);
   --accent: oklch(0.78 0.055 82);
   --accent-foreground: oklch(0.22 0.004 60);
-  --terracotta: oklch(0.55 0.121 43);
+  --terracotta: oklch(0.55 0.098 45);
+  --sage: oklch(0.66 0.035 145);
+  --sage-foreground: oklch(0.22 0.010 62);
   --terracotta-foreground: oklch(0.965 0.015 80);
   --destructive: oklch(0.577 0.245 27.325);
   --destructive-foreground: oklch(0.984 0.003 247.858);
-  --border: oklch(0.88 0.01 80);
-  --input: oklch(0.88 0.01 80);
+  --border: oklch(0.875 0.018 76);
+  --input: oklch(0.875 0.018 76);
   --ring: oklch(0.78 0.055 82);
-  --earth: oklch(0.19 0.004 60);
+  --earth: oklch(0.195 0.010 62);
   --earth-foreground: oklch(0.93 0.009 80);
   --font-serif-display: "Cormorant Garamond", Georgia, serif;
   --font-sans-body: "Jost", "Helvetica Neue", sans-serif;
@@ -172,6 +176,23 @@
   h4 {
     font-family: var(--font-serif-display);
     font-weight: 300;
+    letter-spacing: 0.02em;
+  }
+
+  h1 {
+    letter-spacing: 0.035em;
+  }
+
+  /* Ruhigere, langsamere Übergänge im gesamten Haus */
+  a,
+  button,
+  input,
+  textarea,
+  img,
+  svg,
+  [class*="transition"] {
+    transition-duration: 700ms;
+    transition-timing-function: cubic-bezier(0.22, 1, 0.36, 1);
   }
 }
 

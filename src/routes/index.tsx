@@ -1,14 +1,45 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
-import { motion } from "motion/react";
-import { Maximize2, Users, Waves } from "lucide-react";
+import { AnimatePresence, motion } from "motion/react";
+import { ChevronLeft, ChevronRight, Maximize2, Users, Waves } from "lucide-react";
 
 import heroHarbour from "@/assets/hero-harbour.jpg";
-import heritage from "@/assets/heritage.jpg";
+import facadeAsset from "@/assets/facade.jpg.asset.json";
+import spaAsset from "@/assets/spa.jpg.asset.json";
+import rooftopAsset from "@/assets/rooftop.jpg.asset.json";
+import lobbyAsset from "@/assets/lobby.jpg.asset.json";
+import cafeAsset from "@/assets/cafe.jpg.asset.json";
+import champagneAsset from "@/assets/champagne.jpg.asset.json";
+import breakfastAsset from "@/assets/breakfast.jpg.asset.json";
+import igFacadeAsset from "@/assets/ig-facade.jpg.asset.json";
+import igPoolAsset from "@/assets/ig-pool.jpg.asset.json";
+import igBuffetAsset from "@/assets/ig-buffet.jpg.asset.json";
+import igFortressAsset from "@/assets/ig-fortress.jpg.asset.json";
+import igInteriorAsset from "@/assets/ig-interior.jpg.asset.json";
+import igTiropitaAsset from "@/assets/ig-tiropita.jpg.asset.json";
 import roomSuite from "@/assets/room-suite.jpg";
 import roomDeluxe from "@/assets/room-deluxe.jpg";
-import restaurantImg from "@/assets/restaurant.jpg";
-import spaPool from "@/assets/spa-pool.jpg";
+
+
+const heritage = facadeAsset.url;
+const spaPool = igPoolAsset.url;
+const spaTreatment = spaAsset.url;
+const restaurantImg = rooftopAsset.url;
+const cityView = igFacadeAsset.url;
+
+const gallery = [
+  { src: lobbyAsset.url, alt: "Lobby des GDM Megaron mit kupferner Schiffsskulptur" },
+  { src: cafeAsset.url, alt: "Plaza Café mit Blick auf den alten Hafen" },
+  { src: champagneAsset.url, alt: "Abendessen mit Champagner im Megaron" },
+  { src: breakfastAsset.url, alt: "Frühstück im Megaron mit Avocado und Ei" },
+  { src: igBuffetAsset.url, alt: "Kretisches Frühstücksbuffet im Megaron" },
+  { src: igInteriorAsset.url, alt: "Weizenähren in blau-weißen Vasen als Interieur-Detail" },
+  { src: igTiropitaAsset.url, alt: "Kretische Spanakopita auf türkisfarbenem Teller" },
+  { src: igFortressAsset.url, alt: "Blick über Hafen und Festung Koules unter blauem Himmel" },
+  { src: spaTreatment, alt: "Behandlungsraum im Spa des GDM Megaron" },
+];
+
+
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -239,6 +270,12 @@ function Intro() {
             loading="lazy"
             className="shadow-soft h-[26rem] w-full object-cover lg:h-[36rem]"
           />
+          <img
+            src={cityView}
+            alt="Das Megaron am Hafen von Heraklion mit dem Bergmassiv im Hintergrund"
+            loading="lazy"
+            className="mt-6 h-40 w-full object-cover lg:h-52"
+          />
         </Reveal>
 
         <Reveal delay={0.15}>
@@ -280,7 +317,7 @@ function Suites() {
                     src={suite.image}
                     alt={`${suite.name} at the GDM Megaron Historic Hotel`}
                     loading="lazy"
-                    className="h-72 w-full object-cover transition-transform duration-[1200ms] ease-out group-hover:scale-105"
+                    className="h-72 w-full object-cover transition-transform duration-[1600ms] ease-out group-hover:scale-[1.04]"
                   />
                 </div>
                 <div className="px-7 py-8">
@@ -352,7 +389,166 @@ function Banner({
   );
 }
 
+function Lightbox({
+  index,
+  onClose,
+  onChange,
+}: {
+  index: number;
+  onClose: () => void;
+  onChange: (next: number) => void;
+}) {
+  const [playing, setPlaying] = useState(true);
+  const current = gallery[index]!;
+
+  useEffect(() => {
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === "Escape") onClose();
+      if (e.key === "ArrowRight") onChange((index + 1) % gallery.length);
+      if (e.key === "ArrowLeft") onChange((index - 1 + gallery.length) % gallery.length);
+    };
+    window.addEventListener("keydown", onKey);
+    const prev = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
+    return () => {
+      window.removeEventListener("keydown", onKey);
+      document.body.style.overflow = prev;
+    };
+  }, [index, onChange, onClose]);
+
+  useEffect(() => {
+    if (!playing) return;
+    const id = window.setInterval(() => onChange((index + 1) % gallery.length), 5000);
+    return () => window.clearInterval(id);
+  }, [playing, index, onChange]);
+
+  return (
+    <motion.div
+      className="fixed inset-0 z-[100] flex flex-col bg-earth/95 backdrop-blur-sm"
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0 }}
+      transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
+      role="dialog"
+      aria-modal="true"
+      aria-label="Bildergalerie"
+      onClick={onClose}
+    >
+      <div className="flex items-center justify-between px-6 py-6 text-[0.62rem] uppercase tracking-[0.3em] text-earth-foreground/70 lg:px-10">
+        <span>
+          {String(index + 1).padStart(2, "0")} / {String(gallery.length).padStart(2, "0")}
+        </span>
+        <div className="flex items-center gap-6" onClick={(e) => e.stopPropagation()}>
+          <button type="button" onClick={() => setPlaying((v) => !v)} className="hover:text-accent">
+            {playing ? "Pause" : "Play"}
+          </button>
+          <button type="button" onClick={onClose} aria-label="Schließen" className="hover:text-accent">
+            Close
+          </button>
+        </div>
+      </div>
+
+      <div
+        className="relative flex flex-1 items-center justify-center px-4 pb-4 sm:px-16"
+        onClick={(e) => e.stopPropagation()}
+      >
+        <button
+          type="button"
+          aria-label="Vorheriges Bild"
+          onClick={() => onChange((index - 1 + gallery.length) % gallery.length)}
+          className="absolute left-2 z-10 p-3 text-earth-foreground/70 transition-colors hover:text-accent sm:left-5"
+        >
+          <ChevronLeft className="h-7 w-7" strokeWidth={1} />
+        </button>
+
+        <motion.img
+          key={current.src}
+          src={current.src}
+          alt={current.alt}
+          initial={{ opacity: 0, scale: 1.02 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ duration: 1, ease: [0.22, 1, 0.36, 1] }}
+          className="max-h-full max-w-full object-contain"
+        />
+
+        <button
+          type="button"
+          aria-label="Nächstes Bild"
+          onClick={() => onChange((index + 1) % gallery.length)}
+          className="absolute right-2 z-10 p-3 text-earth-foreground/70 transition-colors hover:text-accent sm:right-5"
+        >
+          <ChevronRight className="h-7 w-7" strokeWidth={1} />
+        </button>
+      </div>
+
+      <div className="px-6 pb-8 text-center lg:px-10" onClick={(e) => e.stopPropagation()}>
+        <p className="text-xs tracking-[0.15em] text-earth-foreground/60">{current.alt}</p>
+        <div className="mt-5 flex justify-center gap-2">
+          {gallery.map((img, i) => (
+            <button
+              key={img.src}
+              type="button"
+              aria-label={`Bild ${i + 1}`}
+              onClick={() => onChange(i)}
+              className={`h-px w-8 transition-colors ${
+                i === index ? "bg-accent" : "bg-earth-foreground/25"
+              }`}
+            />
+          ))}
+        </div>
+      </div>
+    </motion.div>
+  );
+}
+
+function Gallery() {
+  const [active, setActive] = useState<number | null>(null);
+
+  return (
+    <section id="gallery" className="mx-auto max-w-7xl px-6 py-24 lg:px-10 lg:py-36">
+      <Reveal className="max-w-2xl">
+        <span className="eyebrow">Impressionen</span>
+        <h2 className="mt-6 font-display text-3xl sm:text-5xl">Momente im Haus</h2>
+      </Reveal>
+      <div className="mt-16 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+        {gallery.map((img, i) => (
+          <Reveal key={img.src} delay={i * 0.1}>
+            <button
+              type="button"
+              onClick={() => setActive(i)}
+              aria-label={`${img.alt} – vergrößern`}
+              className="group relative block w-full overflow-hidden"
+            >
+              <img
+                src={img.src}
+                alt={img.alt}
+                loading="lazy"
+                decoding="async"
+                width={1200}
+                height={900}
+                className="h-80 w-full object-cover transition-transform duration-[1600ms] ease-out group-hover:scale-[1.04]"
+              />
+              <span className="absolute inset-0 bg-earth/0 transition-colors duration-700 group-hover:bg-earth/20" />
+              <span className="absolute bottom-5 left-5 text-[0.6rem] uppercase tracking-[0.3em] text-primary-foreground opacity-0 transition-opacity duration-700 group-hover:opacity-100">
+                Ansehen
+              </span>
+            </button>
+          </Reveal>
+        ))}
+      </div>
+
+      <AnimatePresence>
+        {active !== null ? (
+          <Lightbox index={active} onChange={setActive} onClose={() => setActive(null)} />
+        ) : null}
+      </AnimatePresence>
+    </section>
+  );
+}
+
+
 function Contact() {
+
   return (
     <section id="contact" className="mx-auto max-w-7xl px-6 py-24 lg:px-10 lg:py-36">
       <div className="grid gap-16 lg:grid-cols-2">
@@ -495,7 +691,9 @@ function Index() {
           copy="Our rooftop restaurant reworks the island's oldest recipes with produce from mountain villages and boats moored below. Dinner unfolds slowly, framed by the fortress of Rocca a Mare."
           alt="Rooftop restaurant terrace with harbour view at dusk"
         />
+        <Gallery />
         <Contact />
+
       </main>
       <Footer />
     </div>
