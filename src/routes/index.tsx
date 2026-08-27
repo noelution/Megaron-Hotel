@@ -4,38 +4,38 @@ import { AnimatePresence, motion } from "motion/react";
 import { ChevronLeft, ChevronRight, Maximize2, Users, Waves } from "lucide-react";
 
 import heroHarbour from "@/assets/hero-harbour.jpg";
-import facadeAsset from "@/assets/facade.jpg.asset.json";
-import spaAsset from "@/assets/spa.jpg.asset.json";
-import rooftopAsset from "@/assets/rooftop.jpg.asset.json";
-import lobbyAsset from "@/assets/lobby.jpg.asset.json";
-import cafeAsset from "@/assets/cafe.jpg.asset.json";
-import champagneAsset from "@/assets/champagne.jpg.asset.json";
-import breakfastAsset from "@/assets/breakfast.jpg.asset.json";
-import igFacadeAsset from "@/assets/ig-facade.jpg.asset.json";
-import igPoolAsset from "@/assets/ig-pool.jpg.asset.json";
-import igBuffetAsset from "@/assets/ig-buffet.jpg.asset.json";
-import igFortressAsset from "@/assets/ig-fortress.jpg.asset.json";
-import igInteriorAsset from "@/assets/ig-interior.jpg.asset.json";
-import igTiropitaAsset from "@/assets/ig-tiropita.jpg.asset.json";
-import roomSuite from "@/assets/room-suite.jpg";
-import roomDeluxe from "@/assets/room-deluxe.jpg";
+import facadeAsset from "@/assets/facade.jpg";
+import spaAsset from "@/assets/spa.jpg";
+import rooftopAsset from "@/assets/rooftop.jpg";
+import lobbyAsset from "@/assets/lobby.jpg";
+import cafeAsset from "@/assets/cafe.jpg";
+import champagneAsset from "@/assets/champagne.jpg";
+import breakfastAsset from "@/assets/breakfast.jpg";
+import igFacadeAsset from "@/assets/ig-facade.jpg";
+import igPoolAsset from "@/assets/ig-pool.jpg";
+import igBuffetAsset from "@/assets/ig-buffet.jpg";
+import igFortressAsset from "@/assets/ig-fortress.jpg";
+import igInteriorAsset from "@/assets/ig-interior.jpg";
+import igTiropitaAsset from "@/assets/ig-tiropita.jpg";
+import roomClassicAsset from "@/assets/room-classic.jpg";
+import roomSeaviewAsset from "@/assets/room-seaview.jpg";
 
 
-const heritage = facadeAsset.url;
-const spaPool = igPoolAsset.url;
-const spaTreatment = spaAsset.url;
-const restaurantImg = rooftopAsset.url;
-const cityView = igFacadeAsset.url;
+const heritage = facadeAsset;
+const spaPool = igPoolAsset;
+const spaTreatment = spaAsset;
+const restaurantImg = rooftopAsset;
+const cityView = igFacadeAsset;
 
 const gallery = [
-  { src: lobbyAsset.url, alt: "Lobby des GDM Megaron mit kupferner Schiffsskulptur" },
-  { src: cafeAsset.url, alt: "Plaza Café mit Blick auf den alten Hafen" },
-  { src: champagneAsset.url, alt: "Abendessen mit Champagner im Megaron" },
-  { src: breakfastAsset.url, alt: "Frühstück im Megaron mit Avocado und Ei" },
-  { src: igBuffetAsset.url, alt: "Kretisches Frühstücksbuffet im Megaron" },
-  { src: igInteriorAsset.url, alt: "Weizenähren in blau-weißen Vasen als Interieur-Detail" },
-  { src: igTiropitaAsset.url, alt: "Kretische Spanakopita auf türkisfarbenem Teller" },
-  { src: igFortressAsset.url, alt: "Blick über Hafen und Festung Koules unter blauem Himmel" },
+  { src: lobbyAsset, alt: "Lobby des GDM Megaron mit kupferner Schiffsskulptur" },
+  { src: cafeAsset, alt: "Plaza Café mit Blick auf den alten Hafen" },
+  { src: champagneAsset, alt: "Abendessen mit Champagner im Megaron" },
+  { src: breakfastAsset, alt: "Frühstück im Megaron mit Avocado und Ei" },
+  { src: igBuffetAsset, alt: "Kretisches Frühstücksbuffet im Megaron" },
+  { src: igInteriorAsset, alt: "Weizenähren in blau-weißen Vasen als Interieur-Detail" },
+  { src: igTiropitaAsset, alt: "Kretische Spanakopita auf türkisfarbenem Teller" },
+  { src: igFortressAsset, alt: "Blick über Hafen und Festung Koules unter blauem Himmel" },
   { src: spaTreatment, alt: "Behandlungsraum im Spa des GDM Megaron" },
 ];
 
@@ -73,7 +73,7 @@ const navItems = [
 const suites = [
   {
     name: "Harbour Deluxe",
-    image: roomDeluxe,
+    image: roomSeaviewAsset,
     copy: "Linen tones, arched windows and the slow rhythm of the Venetian port below.",
     sqm: "32 m²",
     guests: "2 Guests",
@@ -81,7 +81,7 @@ const suites = [
   },
   {
     name: "Rocca Suite",
-    image: roomSuite,
+    image: roomClassicAsset,
     copy: "A private terrace framing the fortress of Rocca a Mare and the Aegean horizon.",
     sqm: "54 m²",
     guests: "3 Guests",
