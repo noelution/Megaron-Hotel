@@ -6,7 +6,8 @@ import { ChevronLeft, ChevronRight, Maximize2, Users, Waves } from "lucide-react
 import heroHarbour from "@/assets/hero-harbour.jpg";
 import facadeAsset from "@/assets/facade.jpg";
 import spaAsset from "@/assets/spa.jpg";
-import rooftopAsset from "@/assets/rooftop.jpg";
+import spaPool from "@/assets/spa-pool.jpg";
+import restaurantImg from "@/assets/restaurant.jpg";
 import lobbyAsset from "@/assets/lobby.jpg";
 import cafeAsset from "@/assets/cafe.jpg";
 import champagneAsset from "@/assets/champagne.jpg";
@@ -28,9 +29,7 @@ import presLiving from "@/assets/presidential-suite-living.jpg";
 
 
 const heritage = facadeAsset;
-const spaPool = igPoolAsset;
 const spaTreatment = spaAsset;
-const restaurantImg = rooftopAsset;
 const cityView = igFacadeAsset;
 
 const gallery = [
