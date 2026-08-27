@@ -17,8 +17,14 @@ import igBuffetAsset from "@/assets/ig-buffet.jpg";
 import igFortressAsset from "@/assets/ig-fortress.jpg";
 import igInteriorAsset from "@/assets/ig-interior.jpg";
 import igTiropitaAsset from "@/assets/ig-tiropita.jpg";
-import roomClassicAsset from "@/assets/room-classic.jpg";
-import roomSeaviewAsset from "@/assets/room-seaview.jpg";
+import execUrban from "@/assets/exec-urban.jpg";
+import execUrbanBath from "@/assets/exec-urban-bath.jpg";
+import execSea from "@/assets/exec-sea.jpg";
+import execSeaBath from "@/assets/exec-sea-bath.jpg";
+import cornerXl from "@/assets/corner-xl.jpg";
+import cornerXlBath from "@/assets/corner-xl-bath.jpg";
+import presSea from "@/assets/presidential-suite-sea.jpg";
+import presLiving from "@/assets/presidential-suite-living.jpg";
 
 
 const heritage = facadeAsset;
@@ -72,28 +78,40 @@ const navItems = [
 
 const suites = [
   {
-    name: "Harbour Deluxe",
-    image: roomSeaviewAsset,
-    copy: "Linen tones, arched windows and the slow rhythm of the Venetian port below.",
-    sqm: "32 m²",
+    name: "Executive Room Urban View",
+    image: execUrban,
+    detail: execUrbanBath,
+    copy: "High ceilings, deep blue velvet and parquet floors above the streets of the old town.",
+    sqm: "28 m²",
     guests: "2 Guests",
-    view: "Harbour View",
+    view: "Urban View",
   },
   {
-    name: "Rocca Suite",
-    image: roomClassicAsset,
-    copy: "A private terrace framing the fortress of Rocca a Mare and the Aegean horizon.",
-    sqm: "54 m²",
-    guests: "3 Guests",
+    name: "Executive Room Sea View",
+    image: execSea,
+    detail: execSeaBath,
+    copy: "French doors opening to a balcony above the Venetian port and the Aegean horizon.",
+    sqm: "30 m²",
+    guests: "2 Guests",
     view: "Sea View",
   },
   {
-    name: "Megaron Signature",
-    image: heritage,
-    copy: "The original 1925 corner residence, restored in stone, brass and raw silk.",
-    sqm: "78 m²",
-    guests: "4 Guests",
-    view: "Panoramic",
+    name: "Corner XL Room",
+    image: cornerXl,
+    detail: cornerXlBath,
+    copy: "A generous corner residence with dual aspect windows and a quiet working alcove.",
+    sqm: "38 m²",
+    guests: "3 Guests",
+    view: "Corner View",
+  },
+  {
+    name: "Presidential Suite Sea View",
+    image: presSea,
+    detail: presLiving,
+    copy: "A private balcony over the Venetian harbour, a separate living alcove and curated Cretan details.",
+    sqm: "55 m²",
+    guests: "3 Guests",
+    view: "Sea View",
   },
 ];
 
@@ -308,7 +326,7 @@ function Suites() {
           <h2 className="mt-6 font-display text-3xl sm:text-5xl">Rest, framed by the sea</h2>
         </Reveal>
 
-        <div className="mt-16 grid gap-10 md:grid-cols-3">
+        <div className="mt-16 grid gap-10 md:grid-cols-2 xl:grid-cols-4">
           {suites.map((suite, i) => (
             <Reveal key={suite.name} delay={i * 0.12}>
               <article className="group h-full bg-card">
@@ -318,6 +336,15 @@ function Suites() {
                     alt={`${suite.name} at the GDM Megaron Historic Hotel`}
                     loading="lazy"
                     className="h-72 w-full object-cover transition-transform duration-[1600ms] ease-out group-hover:scale-[1.04]"
+                  />
+                </div>
+                <div className="mt-2 overflow-hidden">
+                  <img
+                    src={suite.detail}
+                    alt={`Badezimmer – ${suite.name}`}
+                    loading="lazy"
+                    decoding="async"
+                    className="h-40 w-full object-cover transition-transform duration-[1600ms] ease-out group-hover:scale-[1.04]"
                   />
                 </div>
                 <div className="px-7 py-8">
@@ -548,7 +575,6 @@ function Gallery() {
 
 
 function Contact() {
-
   return (
     <section id="contact" className="mx-auto max-w-7xl px-6 py-24 lg:px-10 lg:py-36">
       <div className="grid gap-16 lg:grid-cols-2">
@@ -556,54 +582,44 @@ function Contact() {
           <span className="eyebrow">Reservations</span>
           <h2 className="mt-6 font-display text-3xl sm:text-5xl">Begin your stay</h2>
           <p className="mt-8 max-w-md text-sm leading-relaxed tracking-wide text-muted-foreground">
-            Our concierge replies personally within one day. Share your dates and we will compose a
-            stay around them.
+            Reserve directly through our online booking engine for the best available rates and
+            exclusive offers.
           </p>
+          <a
+            href="https://gdmmegaron.book-onlinenow.net/index.aspx?Page=3&promocode=GDMMegaronSpecialOffers&src=1"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="mt-8 inline-block border border-accent bg-accent px-10 py-4 text-[0.65rem] uppercase tracking-[0.35em] text-background transition-colors hover:bg-transparent hover:text-foreground"
+          >
+            Check Availability
+          </a>
         </Reveal>
 
         <Reveal delay={0.15}>
-          <form
-            className="space-y-8"
-            onSubmit={(e) => {
-              e.preventDefault();
-              (e.currentTarget as HTMLFormElement).reset();
-            }}
-          >
-            <div className="grid gap-8 sm:grid-cols-2">
-              <input
-                required
-                placeholder="Name"
-                className="w-full border-b border-border bg-transparent pb-3 text-sm tracking-wide outline-none placeholder:text-muted-foreground focus:border-accent"
-              />
-              <input
-                required
-                type="email"
-                placeholder="Email"
-                className="w-full border-b border-border bg-transparent pb-3 text-sm tracking-wide outline-none placeholder:text-muted-foreground focus:border-accent"
-              />
-              <input
-                type="date"
-                aria-label="Arrival"
-                className="w-full border-b border-border bg-transparent pb-3 text-sm tracking-wide text-muted-foreground outline-none focus:border-accent"
-              />
-              <input
-                type="date"
-                aria-label="Departure"
-                className="w-full border-b border-border bg-transparent pb-3 text-sm tracking-wide text-muted-foreground outline-none focus:border-accent"
-              />
+          <div className="space-y-8">
+            <div className="space-y-2">
+              <p className="text-[0.65rem] uppercase tracking-[0.28em] text-muted-foreground">
+                Address
+              </p>
+              <p className="text-sm leading-relaxed tracking-wide">D. Beaufort 9, Heraklion 712 02, Crete</p>
             </div>
-            <textarea
-              rows={3}
-              placeholder="Your message"
-              className="w-full border-b border-border bg-transparent pb-3 text-sm tracking-wide outline-none placeholder:text-muted-foreground focus:border-accent"
-            />
-            <button
-              type="submit"
-              className="border border-foreground/30 px-10 py-4 text-[0.65rem] uppercase tracking-[0.35em] transition-colors hover:bg-foreground hover:text-background"
-            >
-              Send Enquiry
-            </button>
-          </form>
+            <div className="space-y-2">
+              <p className="text-[0.65rem] uppercase tracking-[0.28em] text-muted-foreground">
+                Phone
+              </p>
+              <p className="text-sm leading-relaxed tracking-wide">
+                <a href="tel:+302810305300" className="hover:text-accent">+30 2810 305 300</a>
+              </p>
+            </div>
+            <div className="space-y-2">
+              <p className="text-[0.65rem] uppercase tracking-[0.28em] text-muted-foreground">
+                Email
+              </p>
+              <p className="text-sm leading-relaxed tracking-wide">
+                <a href="mailto:stay@megaron1925.gr" className="hover:text-accent">stay@megaron1925.gr</a>
+              </p>
+            </div>
+          </div>
         </Reveal>
       </div>
     </section>
